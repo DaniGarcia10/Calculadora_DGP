@@ -46,15 +46,23 @@ public class MainActivity extends AppCompatActivity {
         igual.setOnClickListener(v -> {
             String[] operacion = resultado.getText().toString().split("[+\\-*/]");
             int resultadoOperacion = 0;
-            if (resultado.getText().toString().contains("+")) {
-                resultadoOperacion = Integer.parseInt(operacion[0]) + Integer.parseInt(operacion[1]);
-            } else if (resultado.getText().toString().contains("-")) {
-                resultadoOperacion = Integer.parseInt(operacion[0]) - Integer.parseInt(operacion[1]);
-            } else if (resultado.getText().toString().contains("*")) {
-                resultadoOperacion = Integer.parseInt(operacion[0]) * Integer.parseInt(operacion[1]);
-            } else if (resultado.getText().toString().contains("/")) {
-                resultadoOperacion = Integer.parseInt(operacion[0]) / Integer.parseInt(operacion[1]);
+            String textoResultado = resultado.getText().toString();
+
+            switch (textoResultado.charAt(operacion[0].length())) {
+                case '+':
+                    resultadoOperacion = Integer.parseInt(operacion[0]) + Integer.parseInt(operacion[1]);
+                    break;
+                case '-':
+                    resultadoOperacion = Integer.parseInt(operacion[0]) - Integer.parseInt(operacion[1]);
+                    break;
+                case '*':
+                    resultadoOperacion = Integer.parseInt(operacion[0]) * Integer.parseInt(operacion[1]);
+                    break;
+                case '/':
+                    resultadoOperacion = Integer.parseInt(operacion[0]) / Integer.parseInt(operacion[1]);
+                    break;
             }
+
             resultado.setText(String.valueOf(resultadoOperacion));
         });
 
