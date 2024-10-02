@@ -46,23 +46,20 @@ public class MainActivity extends AppCompatActivity {
         igual.setOnClickListener(v -> {
             String[] operacion = resultado.getText().toString().split("[+\\-*/]");
             int resultadoOperacion = 0;
-            String textoResultado = resultado.getText().toString();
-
-            switch (textoResultado.charAt(operacion[0].length())) {
-                case '+':
-                    resultadoOperacion = Integer.parseInt(operacion[0]) + Integer.parseInt(operacion[1]);
-                    break;
-                case '-':
-                    resultadoOperacion = Integer.parseInt(operacion[0]) - Integer.parseInt(operacion[1]);
-                    break;
-                case '*':
-                    resultadoOperacion = Integer.parseInt(operacion[0]) * Integer.parseInt(operacion[1]);
-                    break;
-                case '/':
-                    resultadoOperacion = Integer.parseInt(operacion[0]) / Integer.parseInt(operacion[1]);
-                    break;
-            }
-
+            if (resultado.getText().toString().contains("+")) {
+                resultadoOperacion = Integer.parseInt(operacion[0]) + Integer.parseInt(operacion[1]);
+            } else if (resultado.getText().toString().contains("-")) {
+                resultadoOperacion = Integer.parseInt(operacion[0]) - Integer.parseInt(operacion[1]);
+            } else if (resultado.getText().toString().contains("*")) {
+                resultadoOperacion = Integer.parseInt(operacion[0]) * Integer.parseInt(operacion[1]);
+            } else if (resultado.getText().toString().contains("/")) {
+                //Compruebo que no se divida por 0
+                if (Integer.parseInt(operacion[1]) == 0) {
+                    resultado.setText("No se puede dividir por 0");
+                    return;
+                } else {
+                resultadoOperacion = Integer.parseInt(operacion[0]) / Integer.parseInt(operacion[1]);
+            }   }
             resultado.setText(String.valueOf(resultadoOperacion));
         });
 
